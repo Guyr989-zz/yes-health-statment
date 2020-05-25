@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>יס הצהרת בריאות</title>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="container">
+            <div class="header">
+                שאלון בריאות
+                <img class="logos" src="logos.png" alt="פלאפון בזק ויס">
+            </div>
+            <div class="inner">
+
+                <h3>שאלון בהתאם לתקנות שעת חירום</h3>
+
+                <form name="health-declaration-form">
+                    <div class="form-group">
+                        <input type="checkbox" name="check1" id="check1">
+                        <label for="check1" class="customCheckBox"></label>
+                        <span>1. אין לי כעת ולא היה לי בשבוע האחרון חום של 38 מעלות צלזיוס ומעלה.</span>
+                        <div class="error_validation" role="alert">שדה
+                            חובה</div>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="check2" id="check2">
+                        <label for="check2" class="customCheckBox"></label>
+                        <span>2. אין לי תסמינים למחלת קורונה, לרבות שיעול או קושי בנשימה (למעט שיעול הנובע ממצב כרוני
+                            כגון
+                            אסתמה או אלרגיה אחרת).</span>
+                        <div class="error_validation" role="alert">שדה
+                            חובה</div>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="check3" id="check3">
+                        <label for="check3" class="customCheckBox"></label><span> 3. לא הייתי במגע עם חולה בנגיף קורונה
+                            במהלך השבועיים האחרונים.</span>
+                        <div class="error_validation" role="alert">
+                            שדה חובה
+                        </div>
+                    </div>
+                    <div class="form-group btn-wrap">
+
+                        <button onclick="validateForm(event)" class="btn btn-default submit_structure" tabindex="273">
+                            <div class="plain">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="paper-plane"
+                                    role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="svg-inline--fa fa-paper-plane fa-w-16 fa-5x">
+                                    <path fill="currentColor"
+                                        d="M464 4.3L16 262.7C-7 276-4.7 309.9 19.8 320L160 378v102c0 
+                                30.2 37.8 43.3 56.7 20.3l60.7-73.8 126.4 52.2c19.1 7.9 40.7-4.2 43.8-24.7l64-417.1C515.7 10.2 487-9 464 4.3zM192 480v-88.8l54.5
+                                22.5L192 480zm224-30.9l-206.2-85.2 199.5-235.8c4.8-5.6-2.9-13.2-8.5-8.4L145.5 337.3 32 290.5 480 32l-64 417.1z">
+                                    </path>
+                                </svg>
+                            </div>
+                            שלח טופס
+                        </button>
+                    </div>
+                </form>
+                <div class="error-collection">
+
+                </div>
+            </div>
+            <div class="success-box">
+                פרטיך נשלחו בהצלחה!
+                <br>
+                מילית הצהרת בריאות לעובד מס' <span id="workerID"></span> בתאריך <span class="date"></span> בהצלחה!
+                מומלץ לצלם את מסך זה כדי להציג בכניסה. יום נעים.
+
+            </div>
+        </div>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+
+            html,
+            body {
+                height: 100vh;
+                font-family: "OpenSansHebrew", Helvetica, Arial, sans-serif;
+                color: #333;
+            }
+
+            .wrap {
+                display: block;
+                width: 100%;
+                height: 100%;
+                background: url('./d.jpg') no-repeat center;
+                background-size: cover;
+                padding-top: 25px;
+            }
+
+            .container {
+                max-width: 600px;
+                width: 100%;
+                position: relative;
+                direction: rtl;
+                margin: 0 auto;
+                border-radius: 4px;
+                background: rgba(250, 250, 250, 1);
+                -webkit-box-shadow: 10px 10px 5px 0px rgba(192, 192, 192, 1);
+                -moz-box-shadow: 10px 10px 5px 0px rgba(192, 192, 192, 1);
+                box-shadow: 3px 0px 7px 0px rgba(192, 192, 192, 1);
+            }
+
+            @media (max-width: 768px) {
+                .container {
+                    width: 95%;
+                }
+            }
+
+            .header {
+                height: 55px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: #0072b6;
+                font-size: 18px;
+                font-weight: 500;
+                padding: 10px 60px;
+                margin-bottom: 60px;
+                box-shadow: -1px 14px 10px 2px rgba(0, 0, 0, 0.09);
+                -webkit-box-shadow: -1px 14px 10px 2px rgba(0, 0, 0, 0.09);
+                border-bottom: 1px solid #bbb;
+            }
+
+            .logos {
+                width: 140px;
+                height: auto;
+            }
+
+            @media (max-width:480px) {
+                .header {
+                    padding: 10px 15px;
+                }
+
+                .logos {
+                    width: 100px;
+                }
+
+            }
+
+            .inner {
+                padding: 0 30px;
+            }
+
+            .inner h3 {
+                text-align: center;
+                text-decoration: underline;
+                font-size: 24px;
+                font-weight: 700;
+                color: #000;
+                margin-bottom: 50px;
+            }
+
+
+            .form-group {
+                height: 100px;
+            }
+
+            @media (max-width: 480px) {
+                .form-group {
+                    height: 120px;
+                }
+
+                .error_validation {
+                    margin: 5px 0;
+                }
+            }
+
+            .form-group input {
+                padding: 0;
+                height: initial;
+                width: initial;
+                margin-bottom: 0;
+                display: none;
+                cursor: pointer;
+            }
+
+            .form-group label {
+                position: relative;
+                cursor: pointer;
+            }
+
+            .form-group label:before {
+                content: '';
+                -webkit-appearance: none;
+                background-color: transparent;
+                border: 1px solid #c8c8c8;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+                padding: 10px;
+                display: inline-block;
+                position: relative;
+                vertical-align: middle;
+                cursor: pointer;
+                margin-right: 5px;
+            }
+
+            .form-group input:checked+label:after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0px;
+                left: 8px;
+                width: 6px;
+                height: 14px;
+                border: solid #555555;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg);
+            }
+
+
+
+            .plain {
+                width: 20px;
+                height: 20px;
+                float: left;
+            }
+
+            .plain:after {
+                clear: both;
+                display: block;
+                overflow: hidden;
+            }
+
+            .btn-wrap {
+                text-align: center;
+                height: auto;
+            }
+
+            .btn {
+                display: inline-block;
+                width: 143px;
+                height: 44px;
+                padding: 6px 12px;
+                font-size: 16px;
+                direction: ltr;
+                margin: 20px auto;
+                color: #555555;
+                font-weight: 600;
+                text-align: center;
+                white-space: nowrap;
+                vertical-align: middle;
+                -ms-touch-action: manipulation;
+                touch-action: manipulation;
+                cursor: pointer;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                background-image: none;
+                border: 1px solid #adadad;
+                border-radius: 4px;
+            }
+
+            .btn:hover {
+                background-color: #e0e0e0;
+            }
+
+            .btn:active {
+                background-color: #e0e0e0;
+                border-color: #dbdbdb;
+                -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+                box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125)
+            }
+
+
+            .error_validation {
+                color: red;
+                margin: 10px 5px;
+                display: none;
+            }
+
+            .error_validation.active {
+                display: block;
+            }
+
+            .error-collection {
+                max-width: 500px;
+                padding: 10px;
+                width: 100%;
+                color: red;
+                margin: auto;
+            }
+
+            .logged-error {
+                font-weight: 700;
+                color: red;
+
+            }
+
+            /* on success add display:flex */
+            .success-box {
+                display: flex;
+                position: absolute;
+                text-align: center;
+                flex-direction: column;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                align-items: center;
+                justify-content: center;
+                color: rgb(95, 180, 9);
+                background: #fff;
+                font-size: 24px;
+                text-shadow: 2px 2px 2px #c5c5c5;
+                border: 2px solid rgba(88, 78, 78, 0.125);
+            }
+        </style>
+
+        <script src="jquery1.11.1.js"></script>
+        <script>
+            var checkboxses = document.querySelectorAll('input[type=checkbox]');
+
+            checkboxses.forEach(checkbox => {
+                checkbox.addEventListener('click', function (e) {
+                    e.target.checked ? $(this).siblings().next().removeClass('active') : $(this)
+                        .siblings().next().addClass('active');
+                })
+
+            });
+
+            var inpObj = document.getElementById("check1");
+
+            function validateForm(event) {
+                event.preventDefault();
+
+                var error_collection = [];
+
+                // get all uncheched checkboxes
+                var active_errors = $("input:checkbox:not(:checked)");
+                $('.error-collection').html('');
+
+                //loop over active_errors and push formatted text to error_collection 
+                $.each(active_errors, function (i, el) {
+                    error_collection.push($(el).parent().text().trim(' '));
+                });
+
+                // get error selection HTML element
+                var error_collection_element = $('.error-collection');
+
+                // -loop over error_collection
+                //  -remove unwanted words
+                //  -create new div element
+                //  -append div to error collection element
+                $.each(error_collection, function (i, el) {
+                    el = el.replace('שדה', '');
+                    el = el.replace('חובה', '');
+                    var div = document.createElement('DIV');
+                    div.innerText = el;
+                    error_collection_element.append(div);
+                });
+
+            }
+
+            var date = new Date();
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+            $('.date').text(day + '/' + month + '/' + year);
+        </script>
+</body>
+
+</html>
